@@ -1,4 +1,5 @@
 ---
+title: Bootloader
 tags: cyber, bootloader
 crystal-type: entity
 crystal-domain: cyber
