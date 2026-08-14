@@ -5,15 +5,17 @@ crystal-type: entity
 crystal-domain: cyber
 icon: "🟢"
 ---
-the chain that boots [[cyber]]: run every component of planetary [[superintelligence]] on a live network, learn from it, then hand the lessons to the protocol.
+the chains that bootstrapped [[cyber]]: run knowledge-graph consensus on live cosmos-sdk networks, learn, hand the lessons to [[soft3]].
 
-the idea arrived in 2016 as cyberChain — a decentralized [[cybergraph]]. the Euler network put pagerank inside consensus on GPUs in 2018. [[bostrom]] launched November 5, 2021: fifty validators, one GPU each, converging on [[focus]] every block. by the end of 2024: 3.1 million [[particles]], 2.9 million [[cyberlinks]], 70,000 [[neurons]] — the first live proof that a network computes what matters, and the calibration data behind the [[collective focus theorem]].
+the idea arrived in 2016 as cyberChain. the Euler network put pagerank inside consensus on GPUs in 2018. [[bostrom]] launched November 5, 2021. by the end of 2024: 3.1 million [[particles]], 2.9 million [[cyberlinks]], 70,000 [[neurons]] — calibration data behind the [[collective focus theorem]].
 
-the bootloader did its job. [[go-cyber]] still runs [[bostrom]] and [[space pussy]] on cosmos-sdk; the same two chains are exercised as [[soft3]] chaosnets so the cutover can be as fast as possible — same networks, next substrate. open your [[cyb]] and touch them today.
+[[go-cyber]] still runs **bostrom** and **space-pussy** on cosmos-sdk at cybernode (rpc.bostrom / rpc.space-pussy). those are migration sources, not the soft3 product network.
+
+product day-one is **spacepussy-test** — the soft3 chaosnet:
 
 ```bash
-soft3 sync                    # space-pussy by default
-soft3 sync --network bostrom  # mainnet bootloader chain
+cargo install true-cyber
+cyber sync                 # spacepussy-test @ http://127.0.0.1:7780
 ```
 
-[[cyber]] · [[soft3]] · [[cyb]] · [[bostrom]] · [[space pussy]]
+[[cyber]] · [[soft3]] · [[cyb]] · [[bostrom]] · [[space pussy]] · [[launch]]
