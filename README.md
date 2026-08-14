@@ -9,7 +9,7 @@ the chain that boots [[cyber]]: run every component of planetary [[superintellig
 
 the idea arrived in 2016 as cyberChain — a decentralized [[cybergraph]]. the Euler network put pagerank inside consensus on GPUs in 2018. [[bostrom]] launched November 5, 2021: fifty validators, one GPU each, converging on [[focus]] every block. by the end of 2024: 3.1 million [[particles]], 2.9 million [[cyberlinks]], 70,000 [[neurons]] — the first live proof that a network computes what matters, and the calibration data behind the [[collective focus theorem]].
 
-the bootloader did its job. [[go-cyber]] is sunsetting in favor of [[soft3]]: the same machine, rebuilt as one provable stack. [[bostrom]] and [[space pussy]] keep running as chaosnets while soft3 matures — open your [[cyb]] and touch them today.
+the bootloader did its job. [[go-cyber]] still runs [[bostrom]] and [[space pussy]] on cosmos-sdk; the same two chains are exercised as [[soft3]] chaosnets so the cutover can be as fast as possible — same networks, next substrate. open your [[cyb]] and touch them today.
 
 ```bash
 soft3 sync                    # space-pussy by default
