@@ -11,6 +11,11 @@ the idea arrived in 2016 as cyberChain. the Euler network put pagerank inside co
 
 [[go-cyber]] still runs **bostrom** and **space-pussy** on cosmos-sdk at cybernode (rpc.bostrom / rpc.space-pussy). those are migration sources, not the soft3 product network.
 
+| chain | consensus token |
+|-------|-----------------|
+| [[bostrom]] | [[$BOOT]] |
+| [[space pussy]] | [[$PUSSY]] |
+
 product day-one is **spacepussy-test** — the soft3 chaosnet:
 
 ```bash
@@ -18,4 +23,4 @@ cargo install true-cyber
 cyber sync                 # spacepussy-test @ http://127.0.0.1:7780
 ```
 
-[[cyber]] · [[soft3]] · [[cyb]] · [[bostrom]] · [[space pussy]] · [[launch]]
+[[cyber]] · [[soft3]] · [[cyb]] · [[bostrom]] · [[$BOOT]] · [[space pussy]] · [[$PUSSY]] · [[launch]]
