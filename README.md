@@ -23,4 +23,4 @@ cargo install true-cyber
 cyber sync                 # spacepussy-test @ http://127.0.0.1:7780
 ```
 
-[[cyber]] · [[soft3]] · [[cyb]] · [[bostrom]] · [[$BOOT]] · [[space pussy]] · [[$PUSSY]] · [[launch]]
+[[bostrom]] · [[$BOOT]] · [[space pussy]] · [[$PUSSY]] · [[launch]]
