@@ -10,6 +10,25 @@ crystal-size: deep
 
 this is the study of what five years of enormous collective effort actually produced, and why it matters for launching [[superintelligence]]
 
+## the scale of the experiment
+
+nothing like this has been run before. not a survey, not a crowdsourcing platform, not a labeled dataset — a five-year live experiment in which tens of thousands of people put money, identity and judgment into teaching a machine what matters:
+
+| participation | count |
+|---------------|-------|
+| accounts created on-chain | 61,675 |
+| people who signed at least one transaction | 52,918 |
+| names claimed ([[moon-passport]]) | 47,837 across 46,039 owners |
+| stakers who bonded savings to consensus | 16,791 |
+| governance voters | 5,134 — 24,534 votes over 35+ proposals |
+| neurons who hand-linked knowledge | 1,240 |
+| validators across the chain's history | 160 |
+| blocks sealed | 25,120,712 over 1,735 days |
+
+compare the precedents. wikipedia's volunteers write for free under editors; OpenCyc paid engineers to encode an ontology; ImageNet paid crowdworkers to label images. here the direction of payment is reversed and there is no editor: **every link was bought by its author** — a person spending scarce [[H]] to assert that two particles belong together, signing it with a key they alone hold. sixty thousand people joined an economy whose only product was structured attention. that has no precedent in the history of either machine learning or money
+
+and it worked twice: [[space pussy]] ran the same physics as a sibling experiment. the pair of graphs, ported into one genesis, are the first knowledge corpora in history where every assertion has a cryptographic author, a timestamp, a price paid, and an audited storage record
+
 ## method
 
 indexers lie; events do not. the canonical graph came from a full scan of all 25,120,712 blocks (5,857,263 carried transactions), extracting `cyberlink` events with self-computed transaction hashes. the count matched the on-chain `graph_stats` exactly — link for link, particle for particle — where the era's indexer had accumulated 15,241 duplicates and lost 259,630 links. availability was audited at the filesystem: a particle counts as alive when its block file exists in the blockstore. scripts and datasets ship with [the snapshot](https://bostrom.network); everything below is reproducible
