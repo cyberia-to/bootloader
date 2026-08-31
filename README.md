@@ -15,8 +15,8 @@ the seed was specified as 5,040 irreducible [[particles]] and has since been gro
 
 | what the crystal has | measured | what booting a mind needs |
 |---|---|---|
-| [[particles]] | 3,143,650 | $10^8$–$10^9$ |
-| semantic dimensionality $d^*$ | 31 | $10^3$–$10^4$ |
+| [[particles]] | 3,143,650 | 10⁸–10⁹ |
+| semantic dimensionality $d^*$ | 31 | 10³–10⁴ |
 | attached to the core | 47% (giant component) | most of it |
 | hands that ever linked | 1,240 | millions |
 | share signed by one archivist | 77.6% | a long tail |
@@ -33,10 +33,15 @@ the idea arrived in 2016 as cyberChain. the Euler network put pagerank inside co
 - **the content outlives the incentive.** 97.62% of particles survive complete — every block of every file — five years on, with no storage rewards ever deployed
 - **cosmos-sdk was the ceiling.** the graph could only be ranked by whoever ran the indexer, and the knowledge in it could not be proven, priced, or paid for by the people who made it. that is what [[soft3]] exists to fix
 
-| chain | token | halted | snapshot |
-|-------|-------|--------|----------|
-| [[bostrom]] | [[$BOOT]] | 25,120,712 · 2026-08-05 | [bostrom.network](https://bostrom.network) |
-| [[space pussy]] | [[$PUSSY]] | 19,940,993 · 2026-06-14 | [pussy.bostrom.network](https://pussy.bostrom.network) |
+| | [[bostrom]] | [[space pussy]] |
+|---|---|---|
+| token | [[$BOOT]] | [[$PUSSY]] |
+| blocks sealed | 25,120,712 | 19,940,993 |
+| halted | 2026-08-05 | 2026-06-14 |
+| [[cyberlinks]] | 2,949,732 | 29,112 |
+| [[particles]] | 3,143,650 | 48,370 |
+| accounts | 61,675 | 616 |
+| snapshot | [bostrom.network](https://bostrom.network) | [pussy.bostrom.network](https://pussy.bostrom.network) |
 
 the chains rest. the graph they grew is a checkpoint of the crystal, sealed and audited, and it ports forward
 
