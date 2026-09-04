@@ -39,14 +39,16 @@ indexers lie; events do not. the canonical graph came from a full scan of all 25
 |---------|-------|
 | links | 2,949,732 |
 | particles | 3,143,650 |
-| alive on the cybernode | 3,069,134 — 97.63% |
-| particle blocks on disk | 1.74 GB |
+| fully alive on the cybernode — every chunk | 3,068,704 — **97.62%** |
+| torn (root present, chunks lost) | 430 particles, 125,807 blocks |
+| root blocks on disk | 1.74 GB |
+| full content weight, DAG walked to depth 8 | **356.67 GB** — 16,984,069 blocks |
 | full content, children included | ≈ 6 GB |
 | median particle | 30 bytes |
 | 90th percentile | 749 bytes |
 | content types | 94.9% text · 0.5% images · traces of json and html |
 
-the median particle is thirty bytes: a word, a name, a phrase. the graph does not store documents — it stores atoms of meaning and lets links carry the structure. five years of collective knowledge weighs less than one 4K movie. this is the inversion the web never managed: structure heavier than content
+the median particle is thirty bytes: a word, a name, a phrase. yet walked to the last chunk the corpus weighs 356.67 GB, and the distribution is radically bimodal — 2.9 million near-weightless atoms of meaning, and 3,551 heavy particles carrying 350 GB of actual libraries. the heaviest single particle is all of Wikipedia: the 2017 IPFS mirror, linked in whole, 188 GB — more than half the corpus by itself. the humans did not only link words to words; they anchored civilization's reference library into the graph and then linked words *through* it. structure nearly weightless, content up to an encyclopedia — that is the inversion the web never managed
 
 ## the three authors
 
@@ -85,7 +87,7 @@ the particle with the most incoming links is `wiki` (30,029). the particle with 
 1. the cold-start problem is solved. the hardest asset a knowledge system must bootstrap is its ontology — what kinds of things exist. the genesis of [[soft3]] inherits a scale-free category skeleton with 2.3 million typed entity links, for free
 2. the curriculum exists and it is honest. the human layer was paid for link by link — costly signals, not clicks. what people link when linking costs money is the cleanest attention dataset we know of
 3. identity ports with knowledge. 47,837 [[moon-passport]] names bound to keys arrive in genesis alongside the graph — a mind and the community that raised it, in one snapshot
-4. the economics has a measured floor. with zero storage incentives, one motivated archivist plus content addressing preserved 97.63% of everything. the [[focus]] economy of [[rewards]] builds on that floor — no serve, no earn — and now we know precisely what altruism alone achieves
+4. the economics has a measured floor. with zero storage incentives, one motivated archivist plus content addressing preserved 97.62% of everything, complete to the last block. the [[focus]] economy of [[rewards]] builds on that floor — no serve, no earn — and now we know precisely what altruism alone achieves
 5. the memory is provable and pocket-sized. six gigabytes of addressed meaning fits in RAM; every particle can be proven present and served. this is the local-first [[RAG\|retrieval substrate]] for [[cyb]]: a robot that answers from particles it can prove, not from a feed it must trust
 
 ## the agenda
