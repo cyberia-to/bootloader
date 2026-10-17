@@ -84,6 +84,12 @@ def smart(addr, q):
     enc = base64.b64encode(json.dumps(q).encode()).decode()
     return get(f"/cosmwasm/wasm/v1/contract/{addr}/smart/{urllib.parse.quote(enc)}")["data"]
 
+def passport_record(nickname, info):
+    return {"nickname": nickname,
+            "owner": info["access"]["owner"],
+            "extension": info["info"].get("extension"),
+            "token_uri": info["info"].get("token_uri")}
+
 def cmd_passport():
     addr = os.environ["PASSPORT"]
     os.makedirs(OUT, exist_ok=True)
@@ -98,14 +104,15 @@ def cmd_passport():
         if not toks: break
         for t in toks:
             info = smart(addr, {"all_nft_info": {"token_id": t}})
-            rec = {"nickname": t,
-                   "owner": info["access"]["owner"],
-                   "extension": info["info"].get("extension"),
-                   "token_uri": info["info"].get("token_uri")}
+            rec = passport_record(t, info)
             out.write(json.dumps(rec, ensure_ascii=False) + "\n"); n += 1
         start_after = toks[-1]
         if n % 2000 == 0: print(f"  {n}/{total}", flush=True)
     print(f"passports.jsonl done ({n})")
+
+def delegation_row(d, va):
+    return [d["delegation"]["delegator_address"], va,
+            d["delegation"]["shares"], d["balance"]["amount"]]
 
 def cmd_staking():
     os.makedirs(OUT, exist_ok=True)
@@ -116,8 +123,7 @@ def cmd_staking():
     for v in vals:
         va = v["operator_address"]
         for d in paged(f"/cosmos/staking/v1beta1/validators/{va}/delegations", "delegation_responses"):
-            w.writerow([d["delegation"]["delegator_address"], va,
-                        d["delegation"]["shares"], d["balance"]["amount"]])
+            w.writerow(delegation_row(d, va))
         print("  " + v["description"]["moniker"], flush=True)
     print("delegations.csv + validators.json done")
 
