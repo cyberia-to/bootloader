@@ -28,11 +28,14 @@ def paged(path, key, limit=1000, extra=""):
 
 import urllib.parse
 
+def is_extra_denom(d):
+    return d.startswith("ibc/") or "/li" in d or d.startswith("pool")
+
 def denoms_of_interest():
     ds = list(CORE)
     for s in paged("/cosmos/bank/v1beta1/supply", "supply"):
         d = s["denom"]
-        if d.startswith("ibc/") or "/li" in d or d.startswith("pool"):
+        if is_extra_denom(d):
             ds.append(d)
     return ds
 
@@ -57,6 +60,9 @@ def cmd_supply():
     json.dump(sup, open(f"{OUT}/supply.json", "w"), indent=1)
     print("supply.json done")
 
+def pool_price(ra, rb):
+    return (rb / ra) if ra else None
+
 def cmd_pools():
     os.makedirs(OUT, exist_ok=True)
     pools = []
@@ -66,7 +72,7 @@ def cmd_pools():
         reserves = {b["denom"]: b["amount"] for b in bal}
         a, b = p["reserve_coin_denoms"][0], p["reserve_coin_denoms"][1]
         ra, rb = int(reserves.get(a, 0)), int(reserves.get(b, 0))
-        price_ab = (rb / ra) if ra else None
+        price_ab = pool_price(ra, rb)
         pools.append({"id": p["id"], "type": "native-liquidity",
                       "denoms": [a, b], "reserves": reserves,
                       "pool_coin_denom": p["pool_coin_denom"],
@@ -77,6 +83,12 @@ def cmd_pools():
 def smart(addr, q):
     enc = base64.b64encode(json.dumps(q).encode()).decode()
     return get(f"/cosmwasm/wasm/v1/contract/{addr}/smart/{urllib.parse.quote(enc)}")["data"]
+
+def passport_record(nickname, info):
+    return {"nickname": nickname,
+            "owner": info["access"]["owner"],
+            "extension": info["info"].get("extension"),
+            "token_uri": info["info"].get("token_uri")}
 
 def cmd_passport():
     addr = os.environ["PASSPORT"]
@@ -92,14 +104,15 @@ def cmd_passport():
         if not toks: break
         for t in toks:
             info = smart(addr, {"all_nft_info": {"token_id": t}})
-            rec = {"nickname": t,
-                   "owner": info["access"]["owner"],
-                   "extension": info["info"].get("extension"),
-                   "token_uri": info["info"].get("token_uri")}
+            rec = passport_record(t, info)
             out.write(json.dumps(rec, ensure_ascii=False) + "\n"); n += 1
         start_after = toks[-1]
         if n % 2000 == 0: print(f"  {n}/{total}", flush=True)
     print(f"passports.jsonl done ({n})")
+
+def delegation_row(d, va):
+    return [d["delegation"]["delegator_address"], va,
+            d["delegation"]["shares"], d["balance"]["amount"]]
 
 def cmd_staking():
     os.makedirs(OUT, exist_ok=True)
@@ -110,10 +123,12 @@ def cmd_staking():
     for v in vals:
         va = v["operator_address"]
         for d in paged(f"/cosmos/staking/v1beta1/validators/{va}/delegations", "delegation_responses"):
-            w.writerow([d["delegation"]["delegator_address"], va,
-                        d["delegation"]["shares"], d["balance"]["amount"]])
+            w.writerow(delegation_row(d, va))
         print("  " + v["description"]["moniker"], flush=True)
     print("delegations.csv + validators.json done")
+
+def resolve_base_account(a):
+    return a.get("base_account") or (a.get("base_vesting_account") or {}).get("base_account") or a
 
 def cmd_pubkeys():
     os.makedirs(OUT, exist_ok=True)
@@ -121,21 +136,25 @@ def cmd_pubkeys():
     w.writerow(["address", "pubkey_type", "pubkey_base64"])
     n = 0
     for a in paged("/cosmos/auth/v1beta1/accounts", "accounts", limit=500):
-        base = a.get("base_account") or a.get("base_vesting_account", {}).get("base_account") or a
+        base = resolve_base_account(a)
         pk = base.get("pub_key") or {}
         w.writerow([base.get("address", ""), pk.get("@type", ""), pk.get("key", "")]); n += 1
         if n % 20000 == 0: print(f"  {n} accounts", flush=True)
     print(f"pubkeys.csv done ({n})")
 
-def cmd_manifest():
-    files = sorted(f for f in os.listdir(OUT) if os.path.isfile(f"{OUT}/{f}") and f != "manifest.json")
+def build_manifest(out_dir):
+    files = sorted(f for f in os.listdir(out_dir) if os.path.isfile(f"{out_dir}/{f}") and f != "manifest.json")
     man = {"chain_id": "bostrom", "final_height": 25120712,
            "final_block_time": "2026-08-05T08:55:00Z",
            "method": "https://github.com/cyberia-to/bootloader/tree/main/snapshot",
            "files": {}}
     for f in files:
-        h = hashlib.sha256(open(f"{OUT}/{f}", "rb").read()).hexdigest()
-        man["files"][f] = {"sha256": h, "bytes": os.path.getsize(f"{OUT}/{f}")}
+        h = hashlib.sha256(open(f"{out_dir}/{f}", "rb").read()).hexdigest()
+        man["files"][f] = {"sha256": h, "bytes": os.path.getsize(f"{out_dir}/{f}")}
+    return man
+
+def cmd_manifest():
+    man = build_manifest(OUT)
     json.dump(man, open(f"{OUT}/manifest.json", "w"), indent=1)
     print(json.dumps(man, indent=1))
 
